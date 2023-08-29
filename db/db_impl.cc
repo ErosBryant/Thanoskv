@@ -175,7 +175,7 @@ DBImpl::DBImpl(const Options& raw_options, const std::string& dbname)
 DBImpl::~DBImpl() {
   // Wait for background work to finish.
 
-    fprintf(stderr,"mem_hits %u, imm_hits %u, sstable_hits %u\n",
+    fprintf(stderr,"mem_hits %lu, imm_hits %lu, sstable_hits %lu\n",
             mem_hits, imm_hits, sstable_hits);
   
   mutex_.Lock();
@@ -1550,9 +1550,9 @@ bool DBImpl::GetProperty(const Slice& property, std::string* value) {
       }
     }
   
-  std::cout << " \n memtable stall time: " << mem_stall_time_ << "  us" << std::endl;
-  std::cout << "L0 stall time: " << L0_stop_stall_time_ << "  us" << std::endl; 
-   std::cout << "L0 slow stall time: " << l0_slow_tall_time_<< "  us" << std::endl; 
+  std::cout << "\nmemtable stall time: " <<1.0 * mem_stall_time_ /1000000 << " s" << std::endl;
+  std::cout << "L0 stall time: " << 1.0 * L0_stop_stall_time_ /1000000<< "  s" << std::endl; 
+    std::cout << "L0 slow stall time: " << 1.0 * l0_slow_tall_time_ /1000000 << "  s" << std::endl; 
 
     return true;
   } else if (in == "sstables") {
